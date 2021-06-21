@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Player : MonoBehaviour
+public class Player : Entity
 {
     Rigidbody2D rb;
 
@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
     private Vector2 mousePosition;
     private Vector2 mouseWorldPosition;
     private bool firing;
+    private InputDevice lastLookDevice;
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -41,7 +42,8 @@ public class Player : MonoBehaviour
 
     public void OnLook(InputAction.CallbackContext callbackContext)
     {
-        if (callbackContext.control.device == Mouse.current) //mouse look
+        lastLookDevice = callbackContext.control.device;
+        if (lastLookDevice == Mouse.current) //mouse look
         {
             mousePosition = callbackContext.ReadValue<Vector2>();
             mouseWorldPosition = GameManager.instance.mainCamera.ScreenToWorldPoint(mousePosition);
@@ -49,7 +51,9 @@ public class Player : MonoBehaviour
         }
         else //controller look
         {
-            lookDirection = callbackContext.ReadValue<Vector2>();
+            Vector2 v = callbackContext.ReadValue<Vector2>();
+            if(v.magnitude > 0.1f)
+                lookDirection = callbackContext.ReadValue<Vector2>();
         }
     }
 
@@ -72,10 +76,13 @@ public class Player : MonoBehaviour
 
     void Move()
     {
-        rb.MovePosition(rb.position + moveDirection * (Time.fixedDeltaTime * moveSpeed)); 
-        
-        mouseWorldPosition = GameManager.instance.mainCamera.ScreenToWorldPoint(mousePosition);
-        lookDirection = (mouseWorldPosition - (Vector2)transform.position);
+        rb.MovePosition(rb.position + moveDirection * (Time.fixedDeltaTime * moveSpeed));
+
+        if (lastLookDevice == Mouse.current)
+        {
+            mouseWorldPosition = GameManager.instance.mainCamera.ScreenToWorldPoint(mousePosition);
+            lookDirection = (mouseWorldPosition - (Vector2)transform.position);
+        }
     }
 
     void Look()

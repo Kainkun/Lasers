@@ -411,6 +411,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 769ed1bfdc29da346b4b642810b4fd06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 10
+  currentHealth: 10
   moveSpeed: 10
   moveDirection: {x: 0, y: 0}
   lookDirection: {x: 0, y: 0}
@@ -1173,7 +1175,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1029944234}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4a8ee1e09ae2054392866af5a7a3319, type: 3}
+  m_Script: {fileID: 11500000, guid: a57ac8b85494b1744a62b58d41c2a03b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 5
@@ -1181,7 +1183,9 @@ MonoBehaviour:
   comfortDistance: 20
   comfortDistanceTolerance: 5
   speed: 5
-  rotateSpeed: 180
+  damage: 2
+  projectile: {fileID: 6909191922369430397, guid: d0baca9b2d161b44f9c326317b549829, type: 3}
+  projectileSpeed: 10
 --- !u!50 &1029944236
 Rigidbody2D:
   serializedVersion: 4
@@ -1297,6 +1301,7 @@ GameObject:
   - component: {fileID: 1033443226}
   - component: {fileID: 1033443225}
   - component: {fileID: 1033443223}
+  - component: {fileID: 1033443224}
   m_Layer: 0
   m_Name: Grunt
   m_TagString: Untagged
@@ -1321,7 +1326,27 @@ MonoBehaviour:
   comfortDistance: 10
   comfortDistanceTolerance: 2
   speed: 2
-  rotateSpeed: 180
+  damage: 0
+--- !u!114 &1033443224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1033443222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a57ac8b85494b1744a62b58d41c2a03b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 3
+  currentHealth: 3
+  comfortDistance: 10
+  comfortDistanceTolerance: 2
+  speed: 2
+  damage: 1
+  projectile: {fileID: 6909191922369430397, guid: d0baca9b2d161b44f9c326317b549829, type: 3}
+  projectileSpeed: 5
 --- !u!50 &1033443225
 Rigidbody2D:
   serializedVersion: 4
@@ -1771,7 +1796,7 @@ MonoBehaviour:
   comfortDistance: 1.5
   comfortDistanceTolerance: 0.2
   speed: 5
-  rotateSpeed: 180
+  damage: 3
 --- !u!1001 &1674266322
 PrefabInstance:
   m_ObjectHideFlags: 0

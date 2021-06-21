@@ -10,9 +10,10 @@ public class BasicEnemy : Entity
     public float comfortDistance;
     public float comfortDistanceTolerance;
     public float speed;
-    public float rotateSpeed;
+    public float damage;
     
-    private Vector2 playerPosition;
+    protected Vector2 playerPosition;
+    protected Vector2 directionToPlayer;
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -21,7 +22,9 @@ public class BasicEnemy : Entity
 
     private void FixedUpdate()
     {
-        playerPosition = (Vector2) GameManager.instance.player.transform.position;
+        if(GameManager.instance.player != null)
+            playerPosition = (Vector2) GameManager.instance.player.transform.position;
+        directionToPlayer = (playerPosition - (Vector2)transform.position).normalized;
 
         GoToComfortDistance();
     }
@@ -30,8 +33,8 @@ public class BasicEnemy : Entity
     {
         float distanceToPlayer = Vector2.Distance(playerPosition, transform.position);
         if(distanceToPlayer  > (comfortDistance + comfortDistanceTolerance))
-            rb.MovePosition(rb.position + (Time.fixedDeltaTime * speed * (playerPosition - (Vector2)transform.position).normalized));
+            rb.MovePosition(rb.position + (Time.fixedDeltaTime * speed * directionToPlayer));
         else if(distanceToPlayer  < (comfortDistance - comfortDistanceTolerance))
-            rb.MovePosition(rb.position + (Time.fixedDeltaTime * speed * ((Vector2)transform.position - playerPosition).normalized));
+            rb.MovePosition(rb.position + (Time.fixedDeltaTime * speed * -directionToPlayer));
     }
 }
