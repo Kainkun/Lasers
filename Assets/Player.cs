@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
 
     public float moveSpeed;
     public Vector2 moveDirection;
-
+    public Vector2 lookDirection;
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        Look();
     }
 
     private void FixedUpdate()
@@ -29,17 +30,43 @@ public class Player : MonoBehaviour
         Move();
     }
 
-    public void MoveInput(InputAction.CallbackContext callbackContext)
+    public void OnMove(InputAction.CallbackContext callbackContext) => moveDirection = callbackContext.ReadValue<Vector2>();
+
+    public void OnLook(InputAction.CallbackContext callbackContext)
     {
-        moveDirection = callbackContext.ReadValue<Vector2>();
+        if (callbackContext.control.device == Mouse.current) //mouse look
+        {
+            Vector2 mousePosition = callbackContext.ReadValue<Vector2>();
+            Vector2 mouseWorldPosition = GameManager.instance.mainCamera.ScreenToWorldPoint(mousePosition);
+            lookDirection = (mouseWorldPosition - (Vector2)transform.position);
+        }
+        else //controller look
+        {
+            lookDirection = callbackContext.ReadValue<Vector2>();
+        }
     }
+
+
+
+    public void OnFire(InputAction.CallbackContext callbackContext)
+    {
+        if (callbackContext.performed)
+            Fire();
+    }
+        
 
     void Move()
     {
-        rb.position += moveDirection;
+        rb.position += moveDirection * (Time.fixedDeltaTime * moveSpeed);
     }
 
-    public void Shoot()
+    void Look()
     {
+        transform.right = lookDirection;
+    }
+
+    void Fire()
+    {
+        print("pew");
     }
 }
