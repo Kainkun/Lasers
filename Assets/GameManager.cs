@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     
     public CinemachineBrain mainCinemachineBrain;
     public Camera mainCamera;
+    public Player player;
 
     private void Awake()
     {
@@ -20,5 +21,6 @@ public class GameManager : MonoBehaviour
     {
         mainCinemachineBrain = CinemachineCore.Instance.GetActiveBrain(0);
         mainCamera = mainCinemachineBrain.OutputCamera;
+        player = FindObjectOfType<Player>();
     }
 }

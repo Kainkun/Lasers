@@ -72,7 +72,7 @@ public class Player : MonoBehaviour
 
     void Move()
     {
-        rb.position += moveDirection * (Time.fixedDeltaTime * moveSpeed);
+        rb.MovePosition(rb.position + moveDirection * (Time.fixedDeltaTime * moveSpeed)); 
         
         mouseWorldPosition = GameManager.instance.mainCamera.ScreenToWorldPoint(mousePosition);
         lookDirection = (mouseWorldPosition - (Vector2)transform.position);
@@ -85,19 +85,16 @@ public class Player : MonoBehaviour
 
     void FireStart()
     {
-        print("p");
         laser.LaserStart();
     }
 
     void Firing()
     {
-        print("e");
         laser.LaserTick();
     }
     
     void FireStop()
     {
-        print("w");
         laser.LaserStop();
     }
 }
