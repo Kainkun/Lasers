@@ -11,6 +11,11 @@ public class Player : MonoBehaviour
     public float moveSpeed;
     public Vector2 moveDirection;
     public Vector2 lookDirection;
+    public Laser laser;
+    
+    private Vector2 mousePosition;
+    private Vector2 mouseWorldPosition;
+    private bool firing;
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -23,6 +28,8 @@ public class Player : MonoBehaviour
     void Update()
     {
         Look();
+        if(firing)
+            Firing();
     }
 
     private void FixedUpdate()
@@ -36,8 +43,8 @@ public class Player : MonoBehaviour
     {
         if (callbackContext.control.device == Mouse.current) //mouse look
         {
-            Vector2 mousePosition = callbackContext.ReadValue<Vector2>();
-            Vector2 mouseWorldPosition = GameManager.instance.mainCamera.ScreenToWorldPoint(mousePosition);
+            mousePosition = callbackContext.ReadValue<Vector2>();
+            mouseWorldPosition = GameManager.instance.mainCamera.ScreenToWorldPoint(mousePosition);
             lookDirection = (mouseWorldPosition - (Vector2)transform.position);
         }
         else //controller look
@@ -50,14 +57,25 @@ public class Player : MonoBehaviour
 
     public void OnFire(InputAction.CallbackContext callbackContext)
     {
-        if (callbackContext.performed)
-            Fire();
+        if (callbackContext.started)
+        {
+            firing = true;
+            FireStart();
+        }
+        else if (callbackContext.canceled)
+        {
+            firing = false;
+            FireStop();
+        }
     }
         
 
     void Move()
     {
         rb.position += moveDirection * (Time.fixedDeltaTime * moveSpeed);
+        
+        mouseWorldPosition = GameManager.instance.mainCamera.ScreenToWorldPoint(mousePosition);
+        lookDirection = (mouseWorldPosition - (Vector2)transform.position);
     }
 
     void Look()
@@ -65,8 +83,21 @@ public class Player : MonoBehaviour
         transform.right = lookDirection;
     }
 
-    void Fire()
+    void FireStart()
     {
-        print("pew");
+        print("p");
+        laser.LaserStart();
+    }
+
+    void Firing()
+    {
+        print("e");
+        laser.LaserTick();
+    }
+    
+    void FireStop()
+    {
+        print("w");
+        laser.LaserStop();
     }
 }
