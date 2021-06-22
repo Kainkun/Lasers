@@ -417,6 +417,8 @@ MonoBehaviour:
   moveDirection: {x: 0, y: 0}
   lookDirection: {x: 0, y: 0}
   laser: {fileID: 135987442}
+  maxCharge: 5
+  charge: 4
 --- !u!50 &170667791
 Rigidbody2D:
   serializedVersion: 4

@@ -12,11 +12,14 @@ public class Player : Entity
     public Vector2 moveDirection;
     public Vector2 lookDirection;
     public Laser laser;
-    
+    public float maxCharge;
+    public float charge;
+
     private Vector2 mousePosition;
     private Vector2 mouseWorldPosition;
     private bool firing;
     private InputDevice lastLookDevice;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -29,8 +32,13 @@ public class Player : Entity
     void Update()
     {
         Look();
-        if(firing)
+        if (firing)
             Firing();
+        else
+        {
+            charge += Time.deltaTime;
+            charge = Mathf.Min(charge, maxCharge);
+        }
     }
 
     private void FixedUpdate()
@@ -47,32 +55,29 @@ public class Player : Entity
         {
             mousePosition = callbackContext.ReadValue<Vector2>();
             mouseWorldPosition = GameManager.instance.mainCamera.ScreenToWorldPoint(mousePosition);
-            lookDirection = (mouseWorldPosition - (Vector2)transform.position);
+            lookDirection = (mouseWorldPosition - (Vector2) transform.position);
         }
         else //controller look
         {
             Vector2 v = callbackContext.ReadValue<Vector2>();
-            if(v.magnitude > 0.1f)
+            if (v.magnitude > 0.1f)
                 lookDirection = callbackContext.ReadValue<Vector2>();
         }
     }
-
 
 
     public void OnFire(InputAction.CallbackContext callbackContext)
     {
         if (callbackContext.started)
         {
-            firing = true;
             FireStart();
         }
         else if (callbackContext.canceled)
         {
-            firing = false;
             FireStop();
         }
     }
-        
+
 
     void Move()
     {
@@ -81,7 +86,7 @@ public class Player : Entity
         if (lastLookDevice == Mouse.current)
         {
             mouseWorldPosition = GameManager.instance.mainCamera.ScreenToWorldPoint(mousePosition);
-            lookDirection = (mouseWorldPosition - (Vector2)transform.position);
+            lookDirection = (mouseWorldPosition - (Vector2) transform.position);
         }
     }
 
@@ -92,16 +97,30 @@ public class Player : Entity
 
     void FireStart()
     {
-        laser.LaserStart();
+        if (charge > 0)
+        {
+            firing = true;
+            laser.LaserStart();
+        }
     }
 
     void Firing()
     {
-        laser.LaserTick();
+        if (charge > 0)
+        {
+            charge -= Time.deltaTime;
+            charge = Mathf.Max(charge, 0);
+            laser.LaserTick();
+        }
+        else if(firing)
+        {
+            FireStop();
+        }
     }
-    
+
     void FireStop()
     {
+        firing = false;
         laser.LaserStop();
     }
 }
