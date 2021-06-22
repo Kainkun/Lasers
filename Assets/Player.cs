@@ -6,23 +6,33 @@ using UnityEngine.InputSystem;
 
 public class Player : Entity
 {
-    Rigidbody2D rb;
+    Rigidbody2D _rb;
 
     public float moveSpeed;
     public Vector2 moveDirection;
     public Vector2 lookDirection;
     public Laser laser;
     public float maxCharge;
-    public float charge;
+    public float _charge;
 
-    private Vector2 mousePosition;
-    private Vector2 mouseWorldPosition;
-    private bool firing;
-    private InputDevice lastLookDevice;
+    public float Charge
+    {
+        get => _charge;
+        set
+        {
+            _charge = Mathf.Clamp(value, 0, maxCharge);
+            GameManager.instance.chargeBar.SetPercent(_charge / maxCharge);
+        }
+    }
+
+    private Vector2 _mousePosition;
+    private Vector2 _mouseWorldPosition;
+    private bool _firing;
+    private InputDevice _lastLookDevice;
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
+        _rb = GetComponent<Rigidbody2D>();
     }
 
     void Start()
@@ -32,13 +42,10 @@ public class Player : Entity
     void Update()
     {
         Look();
-        if (firing)
+        if (_firing)
             Firing();
         else
-        {
-            charge += Time.deltaTime;
-            charge = Mathf.Min(charge, maxCharge);
-        }
+            Charge += Time.deltaTime;
     }
 
     private void FixedUpdate()
@@ -50,12 +57,12 @@ public class Player : Entity
 
     public void OnLook(InputAction.CallbackContext callbackContext)
     {
-        lastLookDevice = callbackContext.control.device;
-        if (lastLookDevice == Mouse.current) //mouse look
+        _lastLookDevice = callbackContext.control.device;
+        if (_lastLookDevice == Mouse.current) //mouse look
         {
-            mousePosition = callbackContext.ReadValue<Vector2>();
-            mouseWorldPosition = GameManager.instance.mainCamera.ScreenToWorldPoint(mousePosition);
-            lookDirection = (mouseWorldPosition - (Vector2) transform.position);
+            _mousePosition = callbackContext.ReadValue<Vector2>();
+            _mouseWorldPosition = GameManager.instance.mainCamera.ScreenToWorldPoint(_mousePosition);
+            lookDirection = (_mouseWorldPosition - (Vector2) transform.position);
         }
         else //controller look
         {
@@ -81,12 +88,12 @@ public class Player : Entity
 
     void Move()
     {
-        rb.MovePosition(rb.position + moveDirection * (Time.fixedDeltaTime * moveSpeed));
+        _rb.MovePosition(_rb.position + moveDirection * (Time.fixedDeltaTime * moveSpeed));
 
-        if (lastLookDevice == Mouse.current)
+        if (_lastLookDevice == Mouse.current)
         {
-            mouseWorldPosition = GameManager.instance.mainCamera.ScreenToWorldPoint(mousePosition);
-            lookDirection = (mouseWorldPosition - (Vector2) transform.position);
+            _mouseWorldPosition = GameManager.instance.mainCamera.ScreenToWorldPoint(_mousePosition);
+            lookDirection = (_mouseWorldPosition - (Vector2) transform.position);
         }
     }
 
@@ -97,22 +104,21 @@ public class Player : Entity
 
     void FireStart()
     {
-        if (charge > 0)
+        if (Charge > 0)
         {
-            firing = true;
+            _firing = true;
             laser.LaserStart();
         }
     }
 
     void Firing()
     {
-        if (charge > 0)
+        if (Charge > 0)
         {
-            charge -= Time.deltaTime;
-            charge = Mathf.Max(charge, 0);
+            Charge -= Time.deltaTime;
             laser.LaserTick();
         }
-        else if(firing)
+        else if (_firing)
         {
             FireStop();
         }
@@ -120,7 +126,7 @@ public class Player : Entity
 
     void FireStop()
     {
-        firing = false;
+        _firing = false;
         laser.LaserStop();
     }
 }

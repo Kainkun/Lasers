@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public CinemachineBrain mainCinemachineBrain;
     public Camera mainCamera;
     public Player player;
+    public UiBar chargeBar;
 
     private void Awake()
     {
@@ -22,5 +23,6 @@ public class GameManager : MonoBehaviour
         mainCinemachineBrain = CinemachineCore.Instance.GetActiveBrain(0);
         mainCamera = mainCinemachineBrain.OutputCamera;
         player = FindObjectOfType<Player>();
+        chargeBar = GameObject.Find("ChargeBG").GetComponent<UiBar>();
     }
 }
