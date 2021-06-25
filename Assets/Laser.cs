@@ -1,13 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
 
 public class Laser : MonoBehaviour
 {
     LineRenderer lineRenderer;
     private LayerMask layerMask;
-    
+
     public ParticleSystem psStart;
     public ParticleSystem psEnd;
     public ParticleSystem psHitEnemy;
@@ -19,15 +20,21 @@ public class Laser : MonoBehaviour
     public float width;
     public float maxDistance;
     public float damagePerSecond;
+    public float pushForce;
 
     private bool isHittingEnemy;
     private bool isLaserOn;
+
 
     private void Awake()
     {
         lineRenderer = GetComponent<LineRenderer>();
         layerMask = ~LayerMask.GetMask("LaserTransparent");
         lineRenderer.widthMultiplier = width;
+    }
+
+    private void Start()
+    {
     }
 
     public void LaserStart()
@@ -37,7 +44,8 @@ public class Laser : MonoBehaviour
         psStart.Play();
         psEnd.Play();
         soundStart.Play();
-        soundDuring.Play();
+        soundDuring.Play(); 
+        GameManager.instance.SetCamShakeAmplitude(1);
     }
 
     public void LaserTick()
@@ -45,7 +53,7 @@ public class Laser : MonoBehaviour
         RaycastHit2D raycastHit2D = Physics2D.Raycast(transform.position, transform.right, maxDistance, layerMask);
         if (raycastHit2D)
         {
-            lineRenderer.SetPosition(1, Vector3.right * (raycastHit2D.distance + width/2));
+            lineRenderer.SetPosition(1, Vector3.right * (raycastHit2D.distance + width / 2));
             psEnd.transform.localPosition = Vector3.right * (raycastHit2D.distance + width / 2);
             psHitEnemy.transform.localPosition = Vector3.right * (raycastHit2D.distance + width / 2);
             Entity entity = raycastHit2D.collider.GetComponent<Entity>();
@@ -57,7 +65,9 @@ public class Laser : MonoBehaviour
                     isHittingEnemy = true;
                     psHitEnemy.Play();
                 }
+
                 entity.TakeDamage(damagePerSecond * Time.deltaTime);
+                entity.rb.AddForce(transform.right * pushForce, ForceMode2D.Force);
             }
             else
             {
@@ -71,17 +81,17 @@ public class Laser : MonoBehaviour
         }
         else
         {
-            lineRenderer.SetPosition(1, Vector3.right * (maxDistance + width/2));
-            psEnd.transform.localPosition = Vector3.right * (maxDistance + width/2);
-            psHitEnemy.transform.localPosition = Vector3.right * (maxDistance + width/2);
+            lineRenderer.SetPosition(1, Vector3.right * (maxDistance + width / 2));
+            psEnd.transform.localPosition = Vector3.right * (maxDistance + width / 2);
+            psHitEnemy.transform.localPosition = Vector3.right * (maxDistance + width / 2);
         }
     }
 
     public void LaserStop()
     {
-        if(!isLaserOn)
+        if (!isLaserOn)
             return;
-        
+
         isLaserOn = false;
         lineRenderer.enabled = false;
         psStart.Stop();
@@ -89,5 +99,6 @@ public class Laser : MonoBehaviour
         psHitEnemy.Stop();
         soundDuring.Stop();
         soundEnd.Play();
+        GameManager.instance.SetCamShakeAmplitude(0);
     }
 }

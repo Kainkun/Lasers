@@ -6,14 +6,14 @@ using UnityEngine.InputSystem;
 
 public class Player : Entity
 {
-    Rigidbody2D _rb;
-
     public float moveSpeed;
     public Vector2 moveDirection;
     public Vector2 lookDirection;
     public Laser laser;
     public float maxCharge;
     public float _charge;
+    public float rechargeSpeed;
+    public float shootKnockbackForce;
 
     public float Charge
     {
@@ -30,9 +30,9 @@ public class Player : Entity
     private bool _firing;
     private InputDevice _lastLookDevice;
 
-    private void Awake()
+    protected  override void Awake()
     {
-        _rb = GetComponent<Rigidbody2D>();
+        base.Awake();
     }
 
     void Start()
@@ -45,7 +45,7 @@ public class Player : Entity
         if (_firing)
             Firing();
         else
-            Charge += Time.deltaTime;
+            Charge += Time.deltaTime * rechargeSpeed;
     }
 
     private void FixedUpdate()
@@ -88,7 +88,7 @@ public class Player : Entity
 
     void Move()
     {
-        _rb.MovePosition(_rb.position + moveDirection * (Time.fixedDeltaTime * moveSpeed));
+        rb.MovePosition(rb.position + moveDirection * (Time.fixedDeltaTime * moveSpeed));
 
         if (_lastLookDevice == Mouse.current)
         {
@@ -116,6 +116,7 @@ public class Player : Entity
         if (Charge > 0)
         {
             Charge -= Time.deltaTime;
+            rb.AddForce(-transform.right * shootKnockbackForce, ForceMode2D.Force);
             laser.LaserTick();
         }
         else if (_firing)
@@ -128,5 +129,12 @@ public class Player : Entity
     {
         _firing = false;
         laser.LaserStop();
+    }
+
+    public override void TakeDamage(float amount)
+    {
+        GameManager.instance.FreezeFrame(0.1f);
+        GameManager.instance.CamShake(3f,0.2f);
+        base.TakeDamage(amount);
     }
 }

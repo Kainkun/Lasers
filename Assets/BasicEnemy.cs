@@ -1,16 +1,17 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class BasicEnemy : Entity
 {
-    private Rigidbody2D rb;
 
     public float comfortDistance;
     public float comfortDistanceTolerance;
     public float speed;
     public float damage;
+    
 
     protected Vector2 playerPosition;
     protected Vector2 directionToPlayer;
@@ -18,7 +19,6 @@ public class BasicEnemy : Entity
     protected override void Awake()
     {
         base.Awake();
-        rb = GetComponent<Rigidbody2D>();
     }
 
 
@@ -38,5 +38,17 @@ public class BasicEnemy : Entity
             rb.MovePosition(rb.position + (Time.fixedDeltaTime * speed * directionToPlayer));
         else if (distanceToPlayer < (comfortDistance - comfortDistanceTolerance))
             rb.MovePosition(rb.position + (Time.fixedDeltaTime * speed * -directionToPlayer));
+    }
+
+    public override void Die()
+    {
+        if(deathPs)
+            Instantiate(deathPs, transform.position, Quaternion.identity);
+        GetComponent<Collider2D>().enabled = false;
+        Color c = sr.color;
+        c.a = 0.2f;
+        sr.color = c;
+        GameManager.instance.FreezeFrame(0.08f);
+        Destroy(this);
     }
 }

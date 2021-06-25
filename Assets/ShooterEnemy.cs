@@ -23,8 +23,9 @@ public class ShooterEnemy : BasicEnemy
             yield return new WaitForSeconds(1);
 
             GameObject tempProjectile = Instantiate(projectile, (Vector2)transform.position + directionToPlayer, Quaternion.identity);
-            tempProjectile.GetComponent<Rigidbody2D>().velocity = directionToPlayer * projectileSpeed;
+            tempProjectile.transform.right = directionToPlayer;
             tempProjectile.GetComponent<Projectile>().damage = damage;
+            tempProjectile.GetComponent<Projectile>().speed = projectileSpeed;
 
             yield return null;
         }

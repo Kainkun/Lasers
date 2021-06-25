@@ -1,21 +1,26 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
     public float maxHealth;
     public float currentHealth;
+    public GameObject deathPs;
 
-    private SpriteRenderer sr;
+    public SpriteRenderer sr;
+
+    public Rigidbody2D rb;
 
     protected virtual void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
-    public void TakeDamage(float amount)
+    public virtual void TakeDamage(float amount)
     {
         if(!hitEffectiveActive)
             StartCoroutine(HitEffect());
@@ -24,8 +29,10 @@ public class Entity : MonoBehaviour
             Die();
     }
 
-    public void Die()
+    public virtual void Die()
     {
+        if(deathPs)
+            Instantiate(deathPs, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 
