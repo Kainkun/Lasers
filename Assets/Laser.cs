@@ -7,25 +7,37 @@ public class Laser : MonoBehaviour
 {
     LineRenderer lineRenderer;
     private LayerMask layerMask;
-    private ParticleSystem ps;
+    
+    public ParticleSystem psStart;
+    public ParticleSystem psEnd;
+    public ParticleSystem psHitEnemy;
+
+    public AudioSource soundStart;
+    public AudioSource soundDuring;
+    public AudioSource soundEnd;
 
     public float width;
     public float maxDistance;
     public float damagePerSecond;
-    
+
+    private bool isHittingEnemy;
+    private bool isLaserOn;
 
     private void Awake()
     {
         lineRenderer = GetComponent<LineRenderer>();
         layerMask = ~LayerMask.GetMask("LaserTransparent");
         lineRenderer.widthMultiplier = width;
-        ps = GetComponentInChildren<ParticleSystem>();
     }
 
     public void LaserStart()
     {
+        isLaserOn = true;
         lineRenderer.enabled = true;
-        ps.Play();
+        psStart.Play();
+        psEnd.Play();
+        soundStart.Play();
+        soundDuring.Play();
     }
 
     public void LaserTick()
@@ -34,23 +46,48 @@ public class Laser : MonoBehaviour
         if (raycastHit2D)
         {
             lineRenderer.SetPosition(1, Vector3.right * (raycastHit2D.distance + width/2));
-            ps.transform.localPosition = Vector3.right * (raycastHit2D.distance + width / 2);
+            psEnd.transform.localPosition = Vector3.right * (raycastHit2D.distance + width / 2);
+            psHitEnemy.transform.localPosition = Vector3.right * (raycastHit2D.distance + width / 2);
             Entity entity = raycastHit2D.collider.GetComponent<Entity>();
             if (entity)
             {
+                if (!isHittingEnemy)
+                {
+                    soundDuring.pitch = 2f;
+                    isHittingEnemy = true;
+                    psHitEnemy.Play();
+                }
                 entity.TakeDamage(damagePerSecond * Time.deltaTime);
+            }
+            else
+            {
+                if (isHittingEnemy)
+                {
+                    soundDuring.pitch = 1f;
+                    isHittingEnemy = false;
+                    psHitEnemy.Stop();
+                }
             }
         }
         else
         {
             lineRenderer.SetPosition(1, Vector3.right * (maxDistance + width/2));
-            ps.transform.localPosition = Vector3.right * (maxDistance + width/2);
+            psEnd.transform.localPosition = Vector3.right * (maxDistance + width/2);
+            psHitEnemy.transform.localPosition = Vector3.right * (maxDistance + width/2);
         }
     }
 
     public void LaserStop()
     {
+        if(!isLaserOn)
+            return;
+        
+        isLaserOn = false;
         lineRenderer.enabled = false;
-        ps.Stop();
+        psStart.Stop();
+        psEnd.Stop();
+        psHitEnemy.Stop();
+        soundDuring.Stop();
+        soundEnd.Play();
     }
 }

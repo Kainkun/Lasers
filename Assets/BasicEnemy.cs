@@ -11,20 +11,22 @@ public class BasicEnemy : Entity
     public float comfortDistanceTolerance;
     public float speed;
     public float damage;
-    
+
     protected Vector2 playerPosition;
     protected Vector2 directionToPlayer;
-    private void Awake()
+
+    protected override void Awake()
     {
+        base.Awake();
         rb = GetComponent<Rigidbody2D>();
     }
-    
+
 
     private void FixedUpdate()
     {
-        if(GameManager.instance.player != null)
+        if (GameManager.instance.player != null)
             playerPosition = (Vector2) GameManager.instance.player.transform.position;
-        directionToPlayer = (playerPosition - (Vector2)transform.position).normalized;
+        directionToPlayer = (playerPosition - (Vector2) transform.position).normalized;
 
         GoToComfortDistance();
     }
@@ -32,9 +34,9 @@ public class BasicEnemy : Entity
     void GoToComfortDistance()
     {
         float distanceToPlayer = Vector2.Distance(playerPosition, transform.position);
-        if(distanceToPlayer  > (comfortDistance + comfortDistanceTolerance))
+        if (distanceToPlayer > (comfortDistance + comfortDistanceTolerance))
             rb.MovePosition(rb.position + (Time.fixedDeltaTime * speed * directionToPlayer));
-        else if(distanceToPlayer  < (comfortDistance - comfortDistanceTolerance))
+        else if (distanceToPlayer < (comfortDistance - comfortDistanceTolerance))
             rb.MovePosition(rb.position + (Time.fixedDeltaTime * speed * -directionToPlayer));
     }
 }
