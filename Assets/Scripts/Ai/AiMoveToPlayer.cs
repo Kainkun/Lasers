@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class AiMoveToPlayer : AiMovement
 {
+    private Transform player;
+    public float timeToMove;
+    
     public override IEnumerator ActionStart()
     {
         StartCoroutine(base.ActionStart());
-        
-        print("mtp start");
 
-        yield return new WaitForSeconds(1);
+        player = GameManager.instance.player.transform;
 
+        yield return new WaitForSeconds(timeToMove);
         StartCoroutine(ActionEnd());
         yield break;
     }
@@ -19,13 +21,12 @@ public class AiMoveToPlayer : AiMovement
     public override void ActionTick()
     {
         base.ActionTick();
-        
-        print("mtp tick");
+        Vector2 directionToPlayer = ((Vector2)player.position - (Vector2)transform.position).normalized;
+        rb.MovePosition(rb.position + (Time.fixedDeltaTime * speed * directionToPlayer));
     }
 
     public override IEnumerator ActionEnd()
     {
-        print("mtp end");
         StartCoroutine(base.ActionEnd());
         yield break;
     }

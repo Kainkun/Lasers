@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AiMovement : AiAction
+public class AiAttack : AiAction
 {
-    
+    public float damage;
 }

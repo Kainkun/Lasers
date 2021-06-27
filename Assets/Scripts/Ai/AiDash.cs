@@ -4,14 +4,20 @@ using UnityEngine;
 
 public class AiDash : AiMovement
 {
+    public float chargeupTime;
+    public float recoveryTime;
+    
     public override IEnumerator ActionStart()
     {
         StartCoroutine(base.ActionStart());
 
-        print("dash start");
+        yield return new WaitForSeconds(chargeupTime);
 
-        yield return new WaitForSeconds(1);
+        Transform player = GameManager.instance.player.transform;
+        Vector2 directionToPlayer = ((Vector2)player.position - (Vector2)transform.position).normalized;
+        rb.AddForce(directionToPlayer * speed, ForceMode2D.Impulse);
 
+        yield return new WaitForSeconds(recoveryTime);
         StartCoroutine(ActionEnd());
         yield break;
     }
@@ -19,13 +25,10 @@ public class AiDash : AiMovement
     public override void ActionTick()
     {
         base.ActionTick();
-        
-        print("dash tick");
     }
 
     public override IEnumerator ActionEnd()
     {
-        print("dash end");
         StartCoroutine(base.ActionEnd());
         yield break;
     }

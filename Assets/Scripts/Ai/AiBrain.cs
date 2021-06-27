@@ -15,7 +15,7 @@ public class AiBrain : MonoBehaviour
         StartAction(currentActionIndex);
     }
 
-    private UnityEvent currentTicker;
+    private UnityEvent currentTicker = new UnityEvent();
     private void Update()
     {
         currentTicker?.Invoke();

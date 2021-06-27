@@ -10,8 +10,10 @@ public class Entity : MonoBehaviour
     public float currentHealth;
     public GameObject deathPs;
 
+    [HideInInspector]
     public SpriteRenderer sr;
 
+    [HideInInspector]
     public Rigidbody2D rb;
 
     protected virtual void Awake()
@@ -22,7 +24,7 @@ public class Entity : MonoBehaviour
 
     public virtual void TakeDamage(float amount)
     {
-        if(!hitEffectiveActive)
+        if (!hitEffectiveActive)
             StartCoroutine(HitEffect());
         currentHealth -= amount;
         if (currentHealth <= 0)
@@ -31,7 +33,7 @@ public class Entity : MonoBehaviour
 
     public virtual void Die()
     {
-        if(deathPs)
+        if (deathPs)
             Instantiate(deathPs, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
@@ -41,7 +43,7 @@ public class Entity : MonoBehaviour
     IEnumerator HitEffect()
     {
         hitEffectiveActive = true;
-        
+
         Color c = sr.color;
 
         sr.color = Color.red;

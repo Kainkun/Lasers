@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        player = FindObjectOfType<Player>();
 
     }
 
@@ -25,7 +26,6 @@ public class GameManager : MonoBehaviour
     {
         mainCinemachineBrain = CinemachineCore.Instance.GetActiveBrain(0);
         mainCamera = mainCinemachineBrain.OutputCamera;
-        player = FindObjectOfType<Player>();
         chargeBar = GameObject.Find("ChargeBG").GetComponent<UiBar>();
         camNoise = mainCinemachineBrain.ActiveVirtualCamera.VirtualCameraGameObject.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
     }
