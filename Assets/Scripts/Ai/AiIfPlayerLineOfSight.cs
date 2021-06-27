@@ -13,10 +13,8 @@ public class AiIfPlayerLineOfSight : AiIf
         Vector2 directionToPlayer = ((Vector2)player.position - (Vector2)transform.position).normalized;
 
         RaycastHit2D hit = Physics2D.Raycast(transform.position, directionToPlayer, maxDistance, layerMask);
-
-        print(hit.transform.name);
         
-        if (hit.transform.GetComponent<Player>())
+        if (hit && hit.transform.GetComponent<Player>())
             return true;
         else
             return false;

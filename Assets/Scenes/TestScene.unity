@@ -5808,7 +5808,7 @@ MonoBehaviour:
       m_Calls: []
   actionIfTrue: {fileID: 1327787064}
   actionIfFalse: {fileID: 1327787062}
-  maxDistance: 100
+  maxDistance: 15
   layerMask:
     serializedVersion: 2
     m_Bits: 4294967295
