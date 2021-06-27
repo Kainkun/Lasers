@@ -5551,6 +5551,7 @@ GameObject:
   - component: {fileID: 1327787063}
   - component: {fileID: 1327787065}
   - component: {fileID: 1327787067}
+  - component: {fileID: 1327787068}
   m_Layer: 0
   m_Name: BrainEnemy
   m_TagString: Untagged
@@ -5731,9 +5732,11 @@ MonoBehaviour:
       m_Calls: []
   probabilities:
   - action: {fileID: 1327787064}
-    proportion: 80
+    proportion: 60
   - action: {fileID: 1327787062}
-    proportion: 20
+    proportion: 10
+  - action: {fileID: 1327787068}
+    proportion: 30
 --- !u!114 &1327787064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5751,7 +5754,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   damage: 2
-  chargeupTime: 2
+  chargeupTime: 1
   recoveryTime: 0
   projectile: {fileID: 6909191922369430397, guid: d0baca9b2d161b44f9c326317b549829, type: 3}
   projectileSpeed: 10
@@ -5784,7 +5787,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2564d773f32024c4abfd207f045d0660, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextAction: {fileID: 1327787061}
+  nextAction: {fileID: 1327787063}
   onActionEnd:
     m_PersistentCalls:
       m_Calls: []
@@ -5812,6 +5815,25 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &1327787068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1327787055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00252fa9c9fc3534eb2409214a2bb03c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextAction: {fileID: 1327787067}
+  onActionEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  speed: 4
+  rb: {fileID: 0}
+  timeToMove: 1
 --- !u!1 &1352261347
 GameObject:
   m_ObjectHideFlags: 0
