@@ -6,13 +6,11 @@ using UnityEngine.Events;
 
 public class AiBrain : MonoBehaviour
 {
-    public bool isLooping = true;
-    public List<AiAction> actions = new List<AiAction>();
-    public int currentActionIndex;
-
+    public AiAction startingAction;
+    public AiAction currentAction;
     public void Start()
     {
-        StartAction(currentActionIndex);
+        StartAction(startingAction);
     }
 
     private UnityEvent currentTicker = new UnityEvent();
@@ -21,32 +19,26 @@ public class AiBrain : MonoBehaviour
         currentTicker?.Invoke();
     }
 
-    public void StartAction(int index)
+    public void StartAction(AiAction action)
     {
-        currentActionIndex = index;
-        actions[currentActionIndex].onActionEnd.AddListener(FinishedAction);
-        currentTicker.AddListener(actions[currentActionIndex].ActionTick);
-        StartCoroutine(actions[currentActionIndex].ActionStart());
+        currentAction = action;
+        currentAction.onActionEnd.AddListener(FinishedAction);
+        currentTicker.AddListener(currentAction.ActionTick);
+        StartCoroutine(currentAction.ActionStart());
     }
     
     public void FinishedAction()
     {
-        currentTicker.RemoveListener(actions[currentActionIndex].ActionTick);
-        actions[currentActionIndex].onActionEnd?.RemoveListener(FinishedAction);
+        currentTicker.RemoveListener(currentAction.ActionTick);
+        currentAction.onActionEnd?.RemoveListener(FinishedAction);
         
-        if (isLooping)
-            currentActionIndex = (currentActionIndex + 1) % actions.Count;
-        else if (currentActionIndex < (actions.Count - 1))
-            currentActionIndex++;
-        else
-            return;
-        
-        StartCoroutine(C_StartNextAction(currentActionIndex));
+        if(currentAction.nextAction)
+            StartCoroutine(C_StartNextAction(currentAction.nextAction));
     }
     
-    IEnumerator C_StartNextAction(int index)
+    IEnumerator C_StartNextAction(AiAction action)
     {
         yield return new WaitForEndOfFrame();
-        StartAction(index);
+        StartAction(action);
     }
 }

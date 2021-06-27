@@ -5,6 +5,7 @@ using UnityEngine.Events;
 
 public class AiAction : MonoBehaviour
 {
+    public AiAction nextAction;
     [HideInInspector]
     public UnityEvent onActionEnd;
     public virtual IEnumerator ActionStart()

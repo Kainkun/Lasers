@@ -20,7 +20,7 @@ public class AiRandom : AiAction
     public override IEnumerator ActionStart()
     {
         chosenAction = GetRandomAction(probabilities);
-
+        nextAction = chosenAction.nextAction;
         chosenAction.onActionEnd.AddListener(onActionEnd.Invoke);
         
         StartCoroutine(chosenAction.ActionStart());
