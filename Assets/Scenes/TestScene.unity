@@ -194,7 +194,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 0
   currentHealth: 0
-  deathPs: {fileID: 0}
+  deathPs: {fileID: 8753012614045484463, guid: b42f8305fd47d504889bbc3fba05e110, type: 3}
   sr: {fileID: 0}
   rb: {fileID: 0}
 --- !u!212 &5559264
@@ -333,7 +333,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 0
   currentHealth: 0
-  deathPs: {fileID: 0}
+  deathPs: {fileID: 8753012614045484463, guid: b42f8305fd47d504889bbc3fba05e110, type: 3}
   sr: {fileID: 0}
   rb: {fileID: 0}
 --- !u!212 &11486648
@@ -472,7 +472,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 0
   currentHealth: 0
-  deathPs: {fileID: 0}
+  deathPs: {fileID: 8753012614045484463, guid: b42f8305fd47d504889bbc3fba05e110, type: 3}
   sr: {fileID: 0}
   rb: {fileID: 0}
 --- !u!212 &12183647
@@ -663,7 +663,7 @@ GameObject:
   - component: {fileID: 135987445}
   - component: {fileID: 135987444}
   - component: {fileID: 135987443}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Laser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1306,7 +1306,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 10
+  m_Mass: 100
   m_LinearDrag: 5
   m_AngularDrag: 5
   m_GravityScale: 1
@@ -1519,7 +1519,7 @@ GameObject:
   - component: {fileID: 170667791}
   - component: {fileID: 170667795}
   - component: {fileID: 170667790}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1844,7 +1844,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 0
   currentHealth: 0
-  deathPs: {fileID: 0}
+  deathPs: {fileID: 8753012614045484463, guid: b42f8305fd47d504889bbc3fba05e110, type: 3}
   sr: {fileID: 0}
   rb: {fileID: 0}
 --- !u!212 &176834167
@@ -1983,7 +1983,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 0
   currentHealth: 0
-  deathPs: {fileID: 0}
+  deathPs: {fileID: 8753012614045484463, guid: b42f8305fd47d504889bbc3fba05e110, type: 3}
   sr: {fileID: 0}
   rb: {fileID: 0}
 --- !u!212 &199440928
@@ -2122,7 +2122,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 0
   currentHealth: 0
-  deathPs: {fileID: 0}
+  deathPs: {fileID: 8753012614045484463, guid: b42f8305fd47d504889bbc3fba05e110, type: 3}
   sr: {fileID: 0}
   rb: {fileID: 0}
 --- !u!212 &328978576
@@ -2422,7 +2422,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 0
   currentHealth: 0
-  deathPs: {fileID: 0}
+  deathPs: {fileID: 8753012614045484463, guid: b42f8305fd47d504889bbc3fba05e110, type: 3}
   sr: {fileID: 0}
   rb: {fileID: 0}
 --- !u!212 &435028338
@@ -2561,7 +2561,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 0
   currentHealth: 0
-  deathPs: {fileID: 0}
+  deathPs: {fileID: 8753012614045484463, guid: b42f8305fd47d504889bbc3fba05e110, type: 3}
   sr: {fileID: 0}
   rb: {fileID: 0}
 --- !u!212 &435731214
@@ -2700,7 +2700,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 0
   currentHealth: 0
-  deathPs: {fileID: 0}
+  deathPs: {fileID: 8753012614045484463, guid: b42f8305fd47d504889bbc3fba05e110, type: 3}
   sr: {fileID: 0}
   rb: {fileID: 0}
 --- !u!212 &445411277
@@ -3015,7 +3015,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 0
   currentHealth: 0
-  deathPs: {fileID: 0}
+  deathPs: {fileID: 8753012614045484463, guid: b42f8305fd47d504889bbc3fba05e110, type: 3}
   sr: {fileID: 0}
   rb: {fileID: 0}
 --- !u!212 &495606053
@@ -3154,7 +3154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 0
   currentHealth: 0
-  deathPs: {fileID: 0}
+  deathPs: {fileID: 8753012614045484463, guid: b42f8305fd47d504889bbc3fba05e110, type: 3}
   sr: {fileID: 0}
   rb: {fileID: 0}
 --- !u!212 &501648076
@@ -3411,7 +3411,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 0
   currentHealth: 0
-  deathPs: {fileID: 0}
+  deathPs: {fileID: 8753012614045484463, guid: b42f8305fd47d504889bbc3fba05e110, type: 3}
   sr: {fileID: 0}
   rb: {fileID: 0}
 --- !u!212 &520009575
@@ -3550,7 +3550,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 0
   currentHealth: 0
-  deathPs: {fileID: 0}
+  deathPs: {fileID: 8753012614045484463, guid: b42f8305fd47d504889bbc3fba05e110, type: 3}
   sr: {fileID: 0}
   rb: {fileID: 0}
 --- !u!212 &592562141
@@ -3756,7 +3756,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 0
   currentHealth: 0
-  deathPs: {fileID: 0}
+  deathPs: {fileID: 8753012614045484463, guid: b42f8305fd47d504889bbc3fba05e110, type: 3}
   sr: {fileID: 0}
   rb: {fileID: 0}
 --- !u!212 &691718534
@@ -4035,7 +4035,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 10
+  m_Mass: 100
   m_LinearDrag: 5
   m_AngularDrag: 5
   m_GravityScale: 1
@@ -4196,7 +4196,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 0
   currentHealth: 0
-  deathPs: {fileID: 0}
+  deathPs: {fileID: 8753012614045484463, guid: b42f8305fd47d504889bbc3fba05e110, type: 3}
   sr: {fileID: 0}
   rb: {fileID: 0}
 --- !u!212 &728996341
@@ -4335,7 +4335,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 0
   currentHealth: 0
-  deathPs: {fileID: 0}
+  deathPs: {fileID: 8753012614045484463, guid: b42f8305fd47d504889bbc3fba05e110, type: 3}
   sr: {fileID: 0}
   rb: {fileID: 0}
 --- !u!212 &770139094
@@ -4474,7 +4474,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 0
   currentHealth: 0
-  deathPs: {fileID: 0}
+  deathPs: {fileID: 8753012614045484463, guid: b42f8305fd47d504889bbc3fba05e110, type: 3}
   sr: {fileID: 0}
   rb: {fileID: 0}
 --- !u!212 &803484020
@@ -4613,7 +4613,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 0
   currentHealth: 0
-  deathPs: {fileID: 0}
+  deathPs: {fileID: 8753012614045484463, guid: b42f8305fd47d504889bbc3fba05e110, type: 3}
   sr: {fileID: 0}
   rb: {fileID: 0}
 --- !u!212 &813547035
@@ -4928,7 +4928,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 0
   currentHealth: 0
-  deathPs: {fileID: 0}
+  deathPs: {fileID: 8753012614045484463, guid: b42f8305fd47d504889bbc3fba05e110, type: 3}
   sr: {fileID: 0}
   rb: {fileID: 0}
 --- !u!212 &867287957
@@ -5067,7 +5067,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 0
   currentHealth: 0
-  deathPs: {fileID: 0}
+  deathPs: {fileID: 8753012614045484463, guid: b42f8305fd47d504889bbc3fba05e110, type: 3}
   sr: {fileID: 0}
   rb: {fileID: 0}
 --- !u!212 &881207740
@@ -5335,7 +5335,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 0
   currentHealth: 0
-  deathPs: {fileID: 0}
+  deathPs: {fileID: 8753012614045484463, guid: b42f8305fd47d504889bbc3fba05e110, type: 3}
   sr: {fileID: 0}
   rb: {fileID: 0}
 --- !u!212 &960011118
@@ -5614,7 +5614,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 10
+  m_Mass: 100
   m_LinearDrag: 5
   m_AngularDrag: 5
   m_GravityScale: 1
@@ -6019,7 +6019,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 0
   currentHealth: 0
-  deathPs: {fileID: 0}
+  deathPs: {fileID: 8753012614045484463, guid: b42f8305fd47d504889bbc3fba05e110, type: 3}
   sr: {fileID: 0}
   rb: {fileID: 0}
 --- !u!212 &1120285922
@@ -6298,7 +6298,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 10
+  m_Mass: 100
   m_LinearDrag: 5
   m_AngularDrag: 5
   m_GravityScale: 1
@@ -6789,7 +6789,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 10
+  m_Mass: 100
   m_LinearDrag: 5
   m_AngularDrag: 5
   m_GravityScale: 1
@@ -7107,7 +7107,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 0
   currentHealth: 0
-  deathPs: {fileID: 0}
+  deathPs: {fileID: 8753012614045484463, guid: b42f8305fd47d504889bbc3fba05e110, type: 3}
   sr: {fileID: 0}
   rb: {fileID: 0}
 --- !u!212 &1352261351
@@ -7498,7 +7498,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 0
   currentHealth: 0
-  deathPs: {fileID: 0}
+  deathPs: {fileID: 8753012614045484463, guid: b42f8305fd47d504889bbc3fba05e110, type: 3}
   sr: {fileID: 0}
   rb: {fileID: 0}
 --- !u!212 &1444114479
@@ -7637,7 +7637,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 0
   currentHealth: 0
-  deathPs: {fileID: 0}
+  deathPs: {fileID: 8753012614045484463, guid: b42f8305fd47d504889bbc3fba05e110, type: 3}
   sr: {fileID: 0}
   rb: {fileID: 0}
 --- !u!212 &1444494714
@@ -8025,7 +8025,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 10
+  m_Mass: 100
   m_LinearDrag: 5
   m_AngularDrag: 5
   m_GravityScale: 1
@@ -8186,7 +8186,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 0
   currentHealth: 0
-  deathPs: {fileID: 0}
+  deathPs: {fileID: 8753012614045484463, guid: b42f8305fd47d504889bbc3fba05e110, type: 3}
   sr: {fileID: 0}
   rb: {fileID: 0}
 --- !u!212 &1519018755
@@ -8325,7 +8325,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 0
   currentHealth: 0
-  deathPs: {fileID: 0}
+  deathPs: {fileID: 8753012614045484463, guid: b42f8305fd47d504889bbc3fba05e110, type: 3}
   sr: {fileID: 0}
   rb: {fileID: 0}
 --- !u!212 &1582536101
@@ -8501,7 +8501,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 0
   currentHealth: 0
-  deathPs: {fileID: 0}
+  deathPs: {fileID: 8753012614045484463, guid: b42f8305fd47d504889bbc3fba05e110, type: 3}
   sr: {fileID: 0}
   rb: {fileID: 0}
 --- !u!212 &1772424768
@@ -8744,7 +8744,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 0
   currentHealth: 0
-  deathPs: {fileID: 0}
+  deathPs: {fileID: 8753012614045484463, guid: b42f8305fd47d504889bbc3fba05e110, type: 3}
   sr: {fileID: 0}
   rb: {fileID: 0}
 --- !u!212 &1917598414
@@ -8883,7 +8883,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 0
   currentHealth: 0
-  deathPs: {fileID: 0}
+  deathPs: {fileID: 8753012614045484463, guid: b42f8305fd47d504889bbc3fba05e110, type: 3}
   sr: {fileID: 0}
   rb: {fileID: 0}
 --- !u!212 &1954103605
@@ -9022,7 +9022,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 0
   currentHealth: 0
-  deathPs: {fileID: 0}
+  deathPs: {fileID: 8753012614045484463, guid: b42f8305fd47d504889bbc3fba05e110, type: 3}
   sr: {fileID: 0}
   rb: {fileID: 0}
 --- !u!212 &1960073803
@@ -9161,7 +9161,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 0
   currentHealth: 0
-  deathPs: {fileID: 0}
+  deathPs: {fileID: 8753012614045484463, guid: b42f8305fd47d504889bbc3fba05e110, type: 3}
   sr: {fileID: 0}
   rb: {fileID: 0}
 --- !u!212 &2054478441
@@ -9700,7 +9700,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 10
+  m_Mass: 100
   m_LinearDrag: 5
   m_AngularDrag: 5
   m_GravityScale: 1
